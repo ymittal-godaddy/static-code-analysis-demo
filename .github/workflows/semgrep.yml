@@ -1,4 +1,4 @@
-name: Bandit
+name: semgrep
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
           mkdir results
           chmod +w results
 
-      - name: Install Bandit
+      - name: Install semgrep
         run: |
           pip3 install semgrep          
 
