@@ -6,7 +6,7 @@ import mysql.connector
 
 app = Flask(__name__)
 
-RDS_HOST = "https://production.rds.gdsec-school.com"
+RDS_HOST = "https://production.rds.gdsec-school.net"
 
 
 @app.route("/homework")
