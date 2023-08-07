@@ -15,13 +15,15 @@ def get_homework():
     if "gdsec-school.com" in link or link.endswith("gdsec-school.com"):
         return Flask.redirect(link, 302)
 
+def sanitize_input(input_string):
+    return mysql.connector.conversion.MySQLConverter().escape(input_string)
 
 @app.route("/update")
 def update_student():
     try:
         name = request.args.get("name", "")
         exec("update_home_dir('%s')" % name)
-        auth = hashlib.md5(request.headers.get("Authorization")).hexdigest()
+        param2 = sanitize_input(request.headers.get("param2"))
 
         connection = mysql.connector.connect(
             host=RDS_HOST, user="instructor_schoi_gd", passwd="i0wog7534ei29"
@@ -31,8 +33,8 @@ def update_student():
             cursor.execute(
                 "UPDATE student SET updated = 'true' WHERE name = "
                 + name
-                + "AND auth = "
-                + auth
+                + "AND param2 = "
+                + param2
             )
 
         return json.dumps({"status": 200})
