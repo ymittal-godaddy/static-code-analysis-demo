@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 RDS_HOST = "https://production.rds.gdsec-school.net"
 
-
 @app.route("/homework")
 def get_homework():
     link = request.args.get("link", "")
